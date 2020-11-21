@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { KEY } = process.env;
+const { USER, KEY } = process.env;
 
 // inside db/index.js
 // imports the pg module
@@ -8,7 +8,7 @@ const { Client } = require("pg");
 
 // supply db name and location
 const client = new Client(
-  `postgres://hrive:${KEY}@localhost:5432/juicebox-dev`
+  `postgres://${USER}:${KEY}@localhost:5432/juicebox-dev`
 );
 
 /**
