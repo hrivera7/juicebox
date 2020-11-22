@@ -7,7 +7,9 @@ const { client } = require("./db");
 client.connect();
 
 const bodyParser = require("body-parser");
-server.use(bodyParser.json());
+const jsonParser = bodyParser.json();
+//server.use(bodyParser.urlencoded({ extended: false }));
+server.use(jsonParser);
 
 const morgan = require("morgan");
 server.use(morgan("dev"));
@@ -31,6 +33,22 @@ server.use("/api", (req, res, next) => {
 server.get("/api", (req, res, next) => {
   console.log("A get request was made to /api");
   res.send({ message: "success" });
+});
+
+server.get("/background/:color", (req, res, next) => {
+  res.send(`
+    <body style="background: ${req.params.color};">
+      <h1>Hello World</h1>
+    </body>
+  `);
+});
+
+server.get("/add/:first/to/:second", (req, res, next) => {
+  res.send(
+    `<h1>${req.params.first} + ${req.params.second} = ${
+      Number(req.params.first) + Number(req.params.second)
+    }</h1>`
+  );
 });
 
 server.listen(PORT, () => {
