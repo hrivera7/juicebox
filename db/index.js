@@ -6,9 +6,10 @@ const { USER, KEY } = process.env;
 
 const { Client } = require("pg");
 
-// supply db name and location
+// supply db name and locaion
 const client = new Client(
-  `postgres://${USER}:${KEY}@localhost:5432/juicebox-dev`
+  process.env.DATABASE_URL ||
+    `postgres://${USER}:${KEY}@localhost:5432/juicebox-dev`
 );
 
 /**

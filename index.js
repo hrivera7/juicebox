@@ -1,5 +1,5 @@
 // inside our server (root index.js)
-const PORT = 3000;
+const { PORT = 3000 } = process.env;
 const express = require("express");
 // creates express app
 const server = express();
